@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="12 个 AC/DC 电感案例，18,459 个候选的体积、磁芯损耗与匝数权衡。">
+  <title>磁件优化散点图 · MagneticsDB2Inductor</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./optimization.css">
+  <script src="./optimization-data.js" defer></script>
+  <script src="./optimization.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#optimization-main">跳至散点图</a>
+  <header class="topbar"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">M</span><span>MagneticsDB<span class="brand-to">2</span>Inductor<small>磁件候选 · 设计权衡</small></span></a><nav aria-label="项目导航"><a href="./">案例与波形 ↗</a><a href="#method">比较口径</a></nav></header>
+  <main id="optimization-main" class="optimization-page" tabindex="-1">
+    <div class="opt-intro"><div class="eyebrow">DESIGN SPACE / AC &amp; DC</div><h1>更小的磁芯，更低的磁损。<br><span>把设计权衡放在一张图上。</span></h1><p>从 12 个案例的已保存候选中探索体积、磁芯损耗与匝数。点选散点查看方案，框选放大局部，按完整比较组查看 Pareto 标记。</p><div id="global-counts" class="opt-global"></div></div>
+    <section aria-label="12 个案例概览"><div id="case-gallery" class="opt-gallery"></div></section>
+    <section id="case-workspace" class="opt-workspace" aria-label="当前案例优化图"><p class="loading" role="status">正在加载已保存候选…</p></section>
+    <section id="method" class="panel opt-method"><h2>如何理解这张图</h2><p>横轴为磁芯有效体积 Ve（cm³），不是器件包络体积；纵轴为所有需求工作点中最坏的波形磁芯损耗估算 Pcore（W），不含铜损。圆点大小表示匝数 N，颜色表示厂家或材料。左下角通常代表更小体积与更低磁损。</p><p>金色圆环表示同一完整比较组内，按 <strong>Ve、最坏 Pcore、N 三项目标均越小越好</strong>得到的非支配候选。投影到二维后，环形点仍可能被另一个点在体积与损耗上同时超过，因为它可能有更少匝数。等值三元组全部保留。不同模型、假设、温度、来源及体积口径分别分组，不连接跨组前沿，也不推荐全局最优。</p><p>来源为 2026-11-14 冻结的 candidates.jsonl.gz 与 run.json，只读取已保存结果。每例 20,000 次有界试探，搜索已截断。缺失任一工作点损耗的候选计入未绘制数量，绝不填成 0 W。Pareto 是完整已保存组上的固定标记，筛选和放大不会重新计算。</p><p>所有方案仍为工程估算：名义 L 不代表带载电感或容差通过；饱和、绕组/铜损、总损耗与温升未完成验证。等效气隙不是机械加工尺寸。<a href="./#sources">查看批次来源与案例说明 ↗</a></p><details><summary>导出数据与溯源哈希</summary><div id="opt-provenance"></div></details></section>
+  </main>
+  <noscript>本页需要 JavaScript；静态候选分布图可在项目 README 中查看。</noscript>
+  <footer class="site-footer">MagneticsDB2Inductor · 已保存候选设计空间 · 工程估算 / 非完整设计认证</footer>
+</body>
+</html>

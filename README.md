@@ -9,17 +9,20 @@
 - 候选散点与详情联动，最多 3 个方案并列对照。
 - 电流与恒 L 重建磁密的联动游标、多工作点结果矩阵。
 - 可复制视图链接，导出当前方案 JSON 和筛选短名单 CSV。
+- [全量数值候选优化散点图](./optimization.html)：18,459 个设计、694 个完整比较组、3,466 个组内三目标非支配候选；12 案例概览、厂家/材料着色、组筛选、体积/磁损上限、框选放大、候选详情和 CSV/JSON/SVG 导出。
 
 ## 运行与更新
 
-网页无第三方依赖、字体/CDN 或后端请求，直接打开 index.html，或用任意静态服务器托管。部署目录只需要 index.html、styles.css、app.js、data.js、.nojekyll 和本说明；数据库、PDF 与设计引擎源码不属于公开站点。
+网页无第三方依赖、字体/CDN 或后端请求，直接打开 index.html 或 optimization.html，或用任意静态服务器托管。部署目录包含 index.html、styles.css、app.js、data.js、optimization.html、optimization.css、optimization.js、optimization-data.js、.nojekyll 和本说明；数据库、PDF 与设计引擎源码不属于公开站点。优化数据单独加载，不增加原案例页的数据下载量。
 
 私有源码工程中通过项目启动器运行 scripts/build_results_site.py，只读取并校验三份固定报告的 SHA-256，按明确字段清单输出 data.js。scripts/verify_results_site.cjs 检查浏览器交互。
+
+scripts/build_optimization_scatter.py 流式读取已冻结 candidates.jsonl.gz，恢复 run.json 内保存的完整比较签名，复用已安装设计包的 screening_record / screen_records 输出 optimization-data.js；不执行新选型或损耗计算。scripts/verify_optimization_site.cjs 独立复核全部组的三目标支配关系并检查交互。
 
 ## 数值边界
 
 电气输入是合成验证波形，结果不是样机实测。磁芯损耗为部分范围工程估算；偏磁、恒 L、温度与平台假设按方案显示。带载 L、饱和、绕组/铜损、总损耗、温升与机械加工未认证。
 
-全部候选的 18,459 个全点数值设计和本页 99 条数值短名单属于不同口径。批次 523 条回放由 481 条案例短名单与 42 条独立固定回归回放组成；后者未混入网页列表。每例 20,000 次有界试探已截断，不宣称全库最优。
+优化页的 18,459 个全点数值设计与案例页 99 条数值短名单属于不同口径。其余 207,708 个候选不完整，不绘为零。三目标 Pareto 仅在同一完整比较组内按 Ve、最坏 Pcore、N 判定，筛选不重算；不绘跨组统一前沿。批次 523 条回放由 481 条案例短名单与 42 条独立固定回归回放组成；后者未混入案例列表。每例 20,000 次有界试探已截断，不宣称全库最优。
 
 数据来源哈希与详细假设在网页内可展开查看。源码仓库保持私有；本展示仓库只发布网页资源与筛选后的结果字段。
