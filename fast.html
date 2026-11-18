@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="分钟级 AC/DC 电感设计：12 案例、2069 个全点数值候选、240 个独立复核代表，交互查看磁芯体积、损耗和匝数。">
+  <link rel="icon" href="data:,">
+  <title>分钟级设计 · MagneticsDB2Inductor</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./optimization.css">
+  <link rel="stylesheet" href="./fast.css">
+  <script src="./fast-data.js" defer></script>
+  <script src="./fast.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#optimization-main">跳至分钟级设计结果</a>
+  <header class="topbar"><a class="brand" href="./fast.html"><span class="brand-mark" aria-hidden="true">M</span><span>MagneticsDB<span class="brand-to">2</span>Inductor<small>分钟级设计 · 已验收结果</small></span></a><nav aria-label="项目导航"><a href="./fast.html" aria-current="page">分钟级设计</a><a href="./optimization.html">历史候选</a><a href="./">历史案例与波形</a><a href="#method">比较口径</a></nav></header>
+  <main id="optimization-main" class="optimization-page" tabindex="-1">
+    <div class="opt-intro"><div class="eyebrow">MINUTE-SCALE DESIGN / FINAL V4 / 2026-11-18</div><h1>一分钟左右，<br><span>看到磁件设计的多种选择。</span></h1><p>12 个已验收 AC / DC 案例，逐例完整耗时 63.79–87.72 秒。探索已经求值的候选，查看体积、最坏磁芯损耗与匝数之间的权衡。输入为合成验证波形，所有结果仍是有条件工程估算。</p><div id="global-counts" class="opt-global"></div></div>
+    <section aria-label="12 个分钟级案例概览"><div id="case-gallery" class="opt-gallery"></div></section>
+    <section id="case-workspace" class="opt-workspace" aria-label="当前分钟级案例"><p class="loading" role="status">正在加载已保存候选…</p></section>
+    <section id="method" class="panel opt-method"><h2>口径与验证边界</h2>
+      <p><strong>冻结模型：</strong>bounded-group-refinement/3（final-v4），每例最多 256 提案、25% 独立探索、单 worker、最多 20 个最终代表，父进程总时限 120 秒。此次展示读取 F3.2 十二例正式五文件结果，未重新搜索。全部十二例均达到 count_cap，无时间截断。</p>
+      <p><strong>耗时：</strong>完整外部耗时包含启动、搜索、独立复核、五文件压缩写出、读回和退出；工程运行器预检、轮间审计与离线评分不计入。首个复核耗时为第一个代表完成原接口独立复核的内部里程碑，不代表完整五文件已经交付。测量环境为 Intel Core i5-12400F（12 逻辑处理器）、约 63.85 GiB 物理内存、Windows 10 build 19045、Python 3.10.11；逐例顺序执行、单 worker。每例新进程；操作系统文件缓存为观察暖态，不能解释为物理冷缓存。网页筛选时间不是设计耗时。</p>
+      <p><strong>图与金环：</strong>Ve 为磁芯有效体积，非器件外形体积；Pcore 为全部需求工作点的最坏波形磁芯损耗估算，不含铜损。金环按完整比较组内 Ve、最坏 Pcore、N 三目标计算，等值三元组全部保留。组签名包含模型、来源语义、假设、温度、检查和体积口径。不同组仅作分布展示，不能连成统一前沿；筛选不重算非支配标记。</p>
+      <p><strong>同组参考覆盖率：</strong>对每个去重的同组非支配参考点 r，必须有同一个本轮数值候选 q 同时满足 Ve、最坏 Pcore、N 各 ≤ 1.05 × r，才算覆盖。分母保留缺失组的全部参考点。参考分母与本轮数值候选数量不同；它不是合格率、全库覆盖率或网页中的金环比例。旧 90% 目标未达到，当前模型由用户接受，覆盖保留为离线诊断。</p>
+      <p><strong>复核层级：</strong>2,069 个候选已经全部需求工作点求值得数值；只有其中 240 个代表（320 工作点）经过原核新会话独立复核，零数值差异。其余点标为“已求值 / 未独立复核”。1,003 个拒算提案与未搜索域单独记账，缺失与拒算绝不填成 0 W。双对数图不绘制合法的零值，可切线性查看。</p>
+      <p><strong>物理边界：</strong>恒 L、偏磁忽略及源正弦解释等假设逐点保留。带载 L、饱和、铜损、总损耗、温升与制造性未完成认证；等效气隙不是机械加工尺寸。重复与留出验证中有限域线上召回仍有 0/1、0/2、0/1，不作全局最优或完备搜索承诺。</p>
+      <details><summary>公开数据与溯源哈希</summary><div id="opt-provenance"></div></details>
+    </section>
+  </main>
+  <noscript>本页需要 JavaScript；README 提供十二例静态耗时和覆盖表。</noscript>
+  <footer class="site-footer">MagneticsDB2Inductor · F3.2 已验收快照 · 有条件工程估算 / 非物理认证</footer>
+</body>
+</html>
